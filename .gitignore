@@ -13,3 +13,6 @@ __v0_jsx-dev-runtime.ts
 node_modules
 .next/
 .DS_Store
+
+rsa_key.p8
+rsa_key.pub
