@@ -63,49 +63,36 @@ export async function POST(req: NextRequest) {
       model: "openai-gpt-5",
 
       messages: [
-        {
-          role: "system",
+  {
+    role: "system",
+    content: `
+You are the biometric analysis assistant for WhatTheHoot.
 
-          content: `
-You are the AI companion recommendation engine for WhatTheHoot.
+Analyze the provided heart rate and breathing rate.
 
-The application measures heart rate and breathing rate.
+Give a very short, friendly analysis in 1-2 sentences.
 
-Your job is to choose a fun virtual pet.
+Mention:
+- whether the heart rate appears low, normal, or high
+- whether the breathing rate appears low, normal, or high
+- If heart rate or breathing rate is high or low, give a suggestion as well.
 
-Choose exactly one pet:
-- owl
-- duck
-
-Choose exactly one mood:
-- Chill
-- Energetic
-- Rest
-
+Keep the response concise.
 Do not diagnose medical conditions.
 Do not provide medical advice.
+Do not recommend treatment.
 
-Return ONLY JSON with this structure:
-
-{
-  "summary": "Short fun explanation",
-  "mood": "Chill",
-  "pet": "owl"
-}
-          `.trim(),
-        },
-
-        {
-          role: "user",
-
-          content: `
+Return ONLY the analysis text.
+    `.trim(),
+  },
+  {
+    role: "user",
+    content: `
 Heart rate: ${heartRate} BPM
 Breathing rate: ${breathingRate} breaths per minute
-
-Choose my WhatTheHoot companion.
-          `.trim(),
-        },
-      ],
+    `.trim(),
+  },
+],
     });
 
     // --------------------------------------------------
